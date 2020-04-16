@@ -69,6 +69,7 @@ export class AppComponent implements OnInit {
   initializeApp() {
     this.platform.ready().then(() => {
       this.statusBar.backgroundColorByHexString('#ffffff');
+      this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
   }
@@ -82,8 +83,10 @@ export class AppComponent implements OnInit {
   setStatusBar() {
     if (this.dark) {
       this.statusBar.backgroundColorByHexString('#ffffff');
+      this.statusBar.styleDefault();
     } else {
       this.statusBar.backgroundColorByHexString('#1f1f1f');
+      this.statusBar.styleLightContent();
     }
   }
 }
