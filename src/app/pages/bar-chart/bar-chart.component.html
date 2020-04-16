@@ -3,12 +3,81 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>Bar Chart</ion-title>
+    <ion-title>
+      <ion-segment [(ngModel)]="segment" (ionChange)="changeView()">
+        <ion-segment-button value="Combined">
+          Combined
+        </ion-segment-button>
+        <ion-segment-button value="Separate">
+          Separate
+        </ion-segment-button>
+      </ion-segment>
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content fullscreen="true">
-  <p>
-    Bar Chart Works!
-  </p>
+<ion-content fullscreen="true" [hidden]="!viewFlag">
+  <ion-toolbar>
+    <ion-title>Bar Chart</ion-title>
+  </ion-toolbar>
+  <ion-card class="welcome-card">
+    <ion-card-header>
+      <ion-card-subtitle>All Cases for</ion-card-subtitle>
+      <ion-card-title>COVID-19 India</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <div class="chart-container">
+        <canvas baseChart width="400" height="400" [datasets]="barChartData" [labels]="barChartLabels"
+          [options]="barChartOptions" [colors]="barChartColors" [legend]="barChartLegend" [chartType]="barChartType"
+          [plugins]="barChartPlugins"></canvas>
+      </div>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
+
+<ion-content fullscreen="true" [hidden]="viewFlag">
+  <ion-toolbar>
+    <ion-title>Bar Chart</ion-title>
+  </ion-toolbar>
+  <ion-card class="welcome-card">
+    <ion-card-header>
+      <ion-card-subtitle>Confirmed Cases for</ion-card-subtitle>
+      <ion-card-title>COVID-19 India</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <div class="chart-container">
+        <canvas baseChart width="400" height="400" [datasets]="barChartData1" [labels]="barChartLabels"
+          [options]="barChartOptions" [colors]="barChartColors1" [legend]="barChartLegend" [chartType]="barChartType"
+          [plugins]="barChartPlugins"></canvas>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card class="welcome-card">
+    <ion-card-header>
+      <ion-card-subtitle>Recovered Cases for</ion-card-subtitle>
+      <ion-card-title>COVID-19 India</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <div class="chart-container">
+        <canvas baseChart width="400" height="400" [datasets]="barChartData2" [labels]="barChartLabels"
+          [options]="barChartOptions" [colors]="barChartColors2" [legend]="barChartLegend" [chartType]="barChartType"
+          [plugins]="barChartPlugins"></canvas>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card class="welcome-card">
+    <ion-card-header>
+      <ion-card-subtitle>Deceased Cases for</ion-card-subtitle>
+      <ion-card-title>COVID-19 India</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <div class="chart-container">
+        <canvas baseChart width="400" height="400" [datasets]="barChartData3" [labels]="barChartLabels"
+          [options]="barChartOptions" [colors]="barChartColors3" [legend]="barChartLegend" [chartType]="barChartType"
+          [plugins]="barChartPlugins"></canvas>
+      </div>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

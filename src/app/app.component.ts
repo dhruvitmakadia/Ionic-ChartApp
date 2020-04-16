@@ -68,7 +68,7 @@ export class AppComponent implements OnInit {
 
   initializeApp() {
     this.platform.ready().then(() => {
-      this.statusBar.styleDefault();
+      this.statusBar.backgroundColorByHexString('#ffffff');
       this.splashScreen.hide();
     });
   }
@@ -77,5 +77,13 @@ export class AppComponent implements OnInit {
     this.menu.enable(false);
     this.storage.set('ion_did_tutorial', false);
     this.router.navigateByUrl('/tutorial');
+  }
+
+  setStatusBar() {
+    if (this.dark) {
+      this.statusBar.backgroundColorByHexString('#ffffff');
+    } else {
+      this.statusBar.backgroundColorByHexString('#1f1f1f');
+    }
   }
 }
