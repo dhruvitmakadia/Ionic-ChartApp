@@ -20,6 +20,20 @@
   <ion-toolbar>
     <ion-title>Line Chart</ion-title>
   </ion-toolbar>
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button color="tertiary">
+      <ion-icon name="settings"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list side="top">
+      <ion-fab-button color="tertiary" (click)="changeChart('bar')">
+        <ion-icon name="podium"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button color="tertiary" (click)="changeChart('line')">
+        <ion-icon name="pulse"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
+
   <ion-card class="welcome-card">
     <ion-card-header>
       <ion-card-subtitle>All Cases for</ion-card-subtitle>
@@ -28,7 +42,7 @@
     <ion-card-content>
       <div class="chart-container">
         <canvas baseChart width="400" height="400" [datasets]="lineChartData" [labels]="lineChartLabels"
-          [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType"
+          [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="chartType"
           [plugins]="lineChartPlugins"></canvas>
       </div>
     </ion-card-content>
@@ -39,6 +53,19 @@
   <ion-toolbar>
     <ion-title>Line Chart</ion-title>
   </ion-toolbar>
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button color="tertiary">
+      <ion-icon name="settings"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list side="top">
+      <ion-fab-button color="tertiary" (click)="changeChart('bar')">
+        <ion-icon name="podium"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button color="tertiary" (click)="changeChart('line')">
+        <ion-icon name="pulse"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
   <ion-card class="welcome-card">
     <ion-card-header>
       <ion-card-subtitle>Confirmed Cases for</ion-card-subtitle>

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CheckTutorial } from './providers/check-tutorial.service';
+import { LineChartComponent } from './pages/line-chart/line-chart.component';
 
 const routes: Routes = [
   {
@@ -10,7 +11,7 @@ const routes: Routes = [
   },
   {
     path: 'app',
-    loadChildren: () => import('./pages/tabs-page/tabs-page.module').then(m => m.TabsModule)
+    component: LineChartComponent
   },
   {
     path: 'tutorial',

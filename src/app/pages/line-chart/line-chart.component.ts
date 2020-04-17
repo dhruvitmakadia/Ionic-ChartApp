@@ -28,6 +28,7 @@ export class LineChartComponent {
   colorArray: any;
   segment: string;
   viewFlag: boolean;
+  chartType: string;
 
   @ViewChild(BaseChartDirective, { static: true }) chart: BaseChartDirective;
 
@@ -35,7 +36,8 @@ export class LineChartComponent {
   constructor() {
     this.segment = 'Combined';
     this.viewFlag = true;
-    this.createLineChart();
+    this.chartType = 'line';
+    this.checkColor();
   }
 
   ionViewDidEnter() {
@@ -43,6 +45,106 @@ export class LineChartComponent {
 
   changeView() {
     this.viewFlag = !this.viewFlag;
+  }
+
+  changeChart(type) {
+    this.chartType = type;
+    this.checkColor();
+  }
+
+  checkColor() {
+    if (this.chartType === 'line') {
+      this.lineChartColors = [
+        { // blue
+          backgroundColor: 'rgba(0,0,255,0.2)',
+          borderColor: 'rgba(0,0,255,1)',
+          pointBackgroundColor: 'rgba(0,0,255,1)',
+          pointBorderColor: '#fff',
+          pointHoverBackgroundColor: '#fff',
+          pointHoverBorderColor: 'rgba(0,0,255,0.8)'
+        },
+        { // red
+          backgroundColor: 'rgba(255,0,0,0.3)',
+          borderColor: 'rgba(255,0,0,1)',
+          pointBackgroundColor: 'rgba(255,0,0,1)',
+          pointBorderColor: '#fff',
+          pointHoverBackgroundColor: '#fff',
+          pointHoverBorderColor: 'rgba(255,0,0,0.8)'
+        },
+        { // green
+          backgroundColor: 'rgba(0,100,0,0.3)',
+          borderColor: 'rgba(0,100,0,1)',
+          pointBackgroundColor: 'rgba(0,100,0,1)',
+          pointBorderColor: '#fff',
+          pointHoverBackgroundColor: '#fff',
+          pointHoverBorderColor: 'rgba(0,100,0,0.8)'
+        }
+      ];
+      this.lineChartColors1 = [
+        { // blue
+          backgroundColor: 'rgba(0,0,255,0.2)',
+          borderColor: 'rgba(0,0,255,1)',
+          pointBackgroundColor: 'rgba(0,0,255,1)',
+          pointBorderColor: '#fff',
+          pointHoverBackgroundColor: '#fff',
+          pointHoverBorderColor: 'rgba(0,0,255,0.8)'
+        }
+      ];
+      this.lineChartColors2 = [
+        { // green
+          backgroundColor: 'rgba(0,100,0,0.3)',
+          borderColor: 'rgba(0,100,0,1)',
+          pointBackgroundColor: 'rgba(0,100,0,1)',
+          pointBorderColor: '#fff',
+          pointHoverBackgroundColor: '#fff',
+          pointHoverBorderColor: 'rgba(0,100,0,0.8)'
+        }
+      ];
+      this.lineChartColors3 = [
+        { // red
+          backgroundColor: 'rgba(255,0,0,0.3)',
+          borderColor: 'rgba(255,0,0,1)',
+          pointBackgroundColor: 'rgba(255,0,0,1)',
+          pointBorderColor: '#fff',
+          pointHoverBackgroundColor: '#fff',
+          pointHoverBorderColor: 'rgba(255,0,0,0.8)'
+        }
+      ];
+    } else {
+      this.lineChartColors = [
+        { // blue
+          backgroundColor: 'rgba(0,0,255,0.8)',
+          borderColor: 'rgba(0,0,255,1)',
+        },
+        { // red
+          backgroundColor: 'rgba(255,0,0,0.8)',
+          borderColor: 'rgba(255,0,0,1)',
+        },
+        { // green
+          backgroundColor: 'rgba(0,100,0,0.8)',
+          borderColor: 'rgba(0,100,0,1)',
+        }
+      ];
+      this.lineChartColors1 = [
+        { // blue
+          backgroundColor: 'rgba(0,0,255,0.8)',
+          borderColor: 'rgba(0,0,255,1)',
+        }
+      ];
+      this.lineChartColors2 = [
+        { // green
+          backgroundColor: 'rgba(0,100,0,0.8)',
+          borderColor: 'rgba(0,100,0,1)',
+        }
+      ];
+      this.lineChartColors3 = [
+        { // red
+          backgroundColor: 'rgba(255,0,0,0.8)',
+          borderColor: 'rgba(255,0,0,1)',
+        }
+      ];
+    }
+    this.createLineChart();
   }
 
   createLineChart() {
@@ -68,10 +170,27 @@ export class LineChartComponent {
       pan: {
         enabled: true,
         mode: 'xy',
+        rangeMin: {
+          x: null,
+          y: 0
+        },
+        rangeMax: {
+          x: null,
+          y: 100
+        },
       },
       zoom: {
         enabled: true,
         mode: 'xy',
+        rangeMin: {
+          x: null,
+          y: 0
+        },
+        rangeMax: {
+          x: null,
+          y: 100
+        },
+        speed: 0.1
       },
       legend: {
         display: true,
@@ -101,64 +220,8 @@ export class LineChartComponent {
         annotations: [{}],
       },
     };
-    this.lineChartColors = [
-      { // blue
-        backgroundColor: 'rgba(0,0,255,0.2)',
-        borderColor: 'rgba(0,0,255,1)',
-        pointBackgroundColor: 'rgba(0,0,255,1)',
-        pointBorderColor: '#fff',
-        pointHoverBackgroundColor: '#fff',
-        pointHoverBorderColor: 'rgba(0,0,255,0.8)'
-      },
-      { // green
-        backgroundColor: 'rgba(0,100,0,0.3)',
-        borderColor: 'rgba(0,100,0,1)',
-        pointBackgroundColor: 'rgba(0,100,0,1)',
-        pointBorderColor: '#fff',
-        pointHoverBackgroundColor: '#fff',
-        pointHoverBorderColor: 'rgba(0,100,0,0.8)'
-      },
-      { // red
-        backgroundColor: 'rgba(255,0,0,0.3)',
-        borderColor: 'rgba(255,0,0,1)',
-        pointBackgroundColor: 'rgba(255,0,0,1)',
-        pointBorderColor: '#fff',
-        pointHoverBackgroundColor: '#fff',
-        pointHoverBorderColor: 'rgba(255,0,0,0.8)'
-      }
-    ];
-    this.lineChartColors1 = [
-      { // blue
-        backgroundColor: 'rgba(0,0,255,0.2)',
-        borderColor: 'rgba(0,0,255,1)',
-        pointBackgroundColor: 'rgba(0,0,255,1)',
-        pointBorderColor: '#fff',
-        pointHoverBackgroundColor: '#fff',
-        pointHoverBorderColor: 'rgba(0,0,255,0.8)'
-      }
-    ];
-    this.lineChartColors2 = [
-      { // green
-        backgroundColor: 'rgba(0,100,0,0.3)',
-        borderColor: 'rgba(0,100,0,1)',
-        pointBackgroundColor: 'rgba(0,100,0,1)',
-        pointBorderColor: '#fff',
-        pointHoverBackgroundColor: '#fff',
-        pointHoverBorderColor: 'rgba(0,100,0,0.8)'
-      }
-    ];
-    this.lineChartColors3 = [
-      { // red
-        backgroundColor: 'rgba(255,0,0,0.3)',
-        borderColor: 'rgba(255,0,0,1)',
-        pointBackgroundColor: 'rgba(255,0,0,1)',
-        pointBorderColor: '#fff',
-        pointHoverBackgroundColor: '#fff',
-        pointHoverBorderColor: 'rgba(255,0,0,0.8)'
-      }
-    ];
     this.lineChartLegend = true;
-    this.lineChartType = 'line';
+    this.lineChartType = this.chartType;
     this.lineChartPlugins = [zoomPlugin];
   }
 }

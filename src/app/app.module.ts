@@ -12,6 +12,8 @@ import { AppComponent } from './app.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { FormsModule } from '@angular/forms';
+import { ChartsModule } from 'ng2-charts';
+import { LineChartComponent } from './pages/line-chart/line-chart.component';
 
 @NgModule({
   imports: [
@@ -19,14 +21,15 @@ import { FormsModule } from '@angular/forms';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    ChartsModule,
     IonicModule.forRoot(),
     IonicStorageModule.forRoot(),
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production
     })
   ],
-  declarations: [AppComponent],
+  declarations: [AppComponent, LineChartComponent],
   providers: [InAppBrowser, SplashScreen, StatusBar],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

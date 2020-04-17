@@ -16,18 +16,6 @@ import { Storage } from '@ionic/storage';
   encapsulation: ViewEncapsulation.None
 })
 export class AppComponent implements OnInit {
-  appPages = [
-    {
-      title: 'Bar Chart',
-      url: '/app/tabs/bar-chart',
-      icon: 'podium'
-    },
-    {
-      title: 'Line Chart',
-      url: '/app/tabs/line-chart',
-      icon: 'pulse'
-    }
-  ];
   dark = false;
 
   constructor(
