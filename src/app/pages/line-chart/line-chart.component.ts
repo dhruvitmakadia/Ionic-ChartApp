@@ -173,7 +173,7 @@ export class LineChartComponent {
       responsive: true,
       pan: {
         enabled: true,
-        mode: 'xy',
+        mode: 'x',
         rangeMin: {
           x: null,
           y: 0
@@ -181,11 +181,12 @@ export class LineChartComponent {
         rangeMax: {
           x: null,
           y: 100
-        },
+        }
       },
       zoom: {
         enabled: true,
-        mode: 'xy',
+        mode: 'x',
+        sensitivity: 0.3,
         rangeMin: {
           x: null,
           y: 0
@@ -193,8 +194,7 @@ export class LineChartComponent {
         rangeMax: {
           x: null,
           y: 100
-        },
-        speed: 0.1
+        }
       },
       legend: {
         display: true,
