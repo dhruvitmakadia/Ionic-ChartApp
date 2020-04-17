@@ -29,6 +29,7 @@ export class LineChartComponent {
   segment: string;
   viewFlag: boolean;
   chartType: string;
+  chartTitle: string;
 
   @ViewChild(BaseChartDirective, { static: true }) chart: BaseChartDirective;
 
@@ -37,6 +38,7 @@ export class LineChartComponent {
     this.segment = 'Combined';
     this.viewFlag = true;
     this.chartType = 'line';
+    this.chartTitle = 'Line';
     this.checkColor();
   }
 
@@ -54,6 +56,7 @@ export class LineChartComponent {
 
   checkColor() {
     if (this.chartType === 'line') {
+      this.chartTitle = 'Line';
       this.lineChartColors = [
         { // blue
           backgroundColor: 'rgba(0,0,255,0.2)',
@@ -111,6 +114,7 @@ export class LineChartComponent {
         }
       ];
     } else {
+      this.chartTitle = 'Bar';
       this.lineChartColors = [
         { // blue
           backgroundColor: 'rgba(0,0,255,0.8)',
