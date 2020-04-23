@@ -41,9 +41,13 @@
     </ion-card-header>
     <ion-card-content>
       <div class="chart-container">
-        <canvas baseChart width="400" height="400" [datasets]="lineChartData" [labels]="lineChartLabels"
+        <canvas baseChart width="400" height="400" [datasets]="chartData" [labels]="chartLabels"
           [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="chartType"
           [plugins]="lineChartPlugins"></canvas>
+      </div>
+      <div class="demo">
+        <ion-button (click)="previous()">Previous</ion-button>
+        <ion-button (click)="next()">Next</ion-button>
       </div>
     </ion-card-content>
   </ion-card>
@@ -73,9 +77,13 @@
     </ion-card-header>
     <ion-card-content>
       <div class="chart-container">
-        <canvas baseChart width="400" height="400" [datasets]="lineChartData1" [labels]="lineChartLabels"
+        <canvas baseChart width="400" height="400" [datasets]="lineChartData1" [labels]="chartLabels"
           [options]="lineChartOptions" [colors]="lineChartColors1" [legend]="lineChartLegend"
           [chartType]="lineChartType" [plugins]="lineChartPlugins"></canvas>
+      </div>
+      <div class="demo">
+        <ion-button (click)="previous()">Previous</ion-button>
+        <ion-button (click)="next()">Next</ion-button>
       </div>
     </ion-card-content>
   </ion-card>
@@ -87,9 +95,13 @@
     </ion-card-header>
     <ion-card-content>
       <div class="chart-container">
-        <canvas baseChart width="400" height="400" [datasets]="lineChartData2" [labels]="lineChartLabels"
+        <canvas baseChart width="400" height="400" [datasets]="lineChartData2" [labels]="chartLabels"
           [options]="lineChartOptions" [colors]="lineChartColors2" [legend]="lineChartLegend"
           [chartType]="lineChartType" [plugins]="lineChartPlugins"></canvas>
+      </div>
+      <div class="demo">
+        <ion-button (click)="previous()">Previous</ion-button>
+        <ion-button (click)="next()">Next</ion-button>
       </div>
     </ion-card-content>
   </ion-card>
@@ -101,9 +113,13 @@
     </ion-card-header>
     <ion-card-content>
       <div class="chart-container">
-        <canvas baseChart width="400" height="400" [datasets]="lineChartData3" [labels]="lineChartLabels"
+        <canvas baseChart width="400" height="400" [datasets]="lineChartData3" [labels]="chartLabels"
           [options]="lineChartOptions" [colors]="lineChartColors3" [legend]="lineChartLegend"
           [chartType]="lineChartType" [plugins]="lineChartPlugins"></canvas>
+      </div>
+      <div class="demo">
+        <ion-button (click)="previous()">Previous</ion-button>
+        <ion-button (click)="next()">Next</ion-button>
       </div>
     </ion-card-content>
   </ion-card>
