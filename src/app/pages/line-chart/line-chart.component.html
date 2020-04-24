@@ -43,13 +43,13 @@
     <ion-card-content>
       <div class="chart-container">
         <canvas baseChart width="400" height="400" [datasets]="chartData" [labels]="chartLabels"
-          [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="chartType"
+          [options]="chartOptions" [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="chartType"
           [plugins]="lineChartPlugins"></canvas>
       </div>
-      <div class="demo">
+      <!-- <div class="demo">
         <ion-button [disabled]="start==0" (click)="previous()">Previous</ion-button>
         <ion-button [disabled]="end==1000" (click)="next()">Next</ion-button>
-      </div>
+      </div> -->
     </ion-card-content>
   </ion-card>
 
@@ -85,7 +85,8 @@
       </ion-fab-button>
     </ion-fab-list>
   </ion-fab>
-  <ion-card class="welcome-card">
+  <ion-card class="welcome-card" swipeAll (swipeleft)="next()"
+  (swiperight)="previous()">
     <ion-card-header>
       <ion-card-subtitle>Confirmed Cases for</ion-card-subtitle>
       <ion-card-title>COVID-19 India</ion-card-title>
@@ -93,17 +94,18 @@
     <ion-card-content>
       <div class="chart-container">
         <canvas baseChart width="400" height="400" [datasets]="lineChartData1" [labels]="chartLabels"
-          [options]="lineChartOptions" [colors]="lineChartColors1" [legend]="lineChartLegend"
+          [options]="chartOptions" [colors]="lineChartColors1" [legend]="lineChartLegend"
           [chartType]="lineChartType" [plugins]="lineChartPlugins"></canvas>
       </div>
-      <div class="demo">
+      <!-- <div class="demo">
         <ion-button (click)="previous()">Previous</ion-button>
         <ion-button (click)="next()">Next</ion-button>
-      </div>
+      </div> -->
     </ion-card-content>
   </ion-card>
 
-  <ion-card class="welcome-card">
+  <ion-card class="welcome-card" swipeAll (swipeleft)="next()"
+  (swiperight)="previous()">
     <ion-card-header>
       <ion-card-subtitle>Recovered Cases for</ion-card-subtitle>
       <ion-card-title>COVID-19 India</ion-card-title>
@@ -111,17 +113,18 @@
     <ion-card-content>
       <div class="chart-container">
         <canvas baseChart width="400" height="400" [datasets]="lineChartData2" [labels]="chartLabels"
-          [options]="lineChartOptions" [colors]="lineChartColors2" [legend]="lineChartLegend"
+          [options]="chartOptions" [colors]="lineChartColors2" [legend]="lineChartLegend"
           [chartType]="lineChartType" [plugins]="lineChartPlugins"></canvas>
       </div>
-      <div class="demo">
+      <!-- <div class="demo">
         <ion-button (click)="previous()">Previous</ion-button>
         <ion-button (click)="next()">Next</ion-button>
-      </div>
+      </div> -->
     </ion-card-content>
   </ion-card>
 
-  <ion-card class="welcome-card">
+  <ion-card class="welcome-card" swipeAll (swipeleft)="next()"
+  (swiperight)="previous()">
     <ion-card-header>
       <ion-card-subtitle>Deceased Cases for</ion-card-subtitle>
       <ion-card-title>COVID-19 India</ion-card-title>
@@ -129,13 +132,13 @@
     <ion-card-content>
       <div class="chart-container">
         <canvas baseChart width="400" height="400" [datasets]="lineChartData3" [labels]="chartLabels"
-          [options]="lineChartOptions" [colors]="lineChartColors3" [legend]="lineChartLegend"
+          [options]="chartOptions" [colors]="lineChartColors3" [legend]="lineChartLegend"
           [chartType]="lineChartType" [plugins]="lineChartPlugins"></canvas>
       </div>
-      <div class="demo">
+      <!-- <div class="demo">
         <ion-button (click)="previous()">Previous</ion-button>
         <ion-button (click)="next()">Next</ion-button>
-      </div>
+      </div> -->
     </ion-card-content>
   </ion-card>
 </ion-content>

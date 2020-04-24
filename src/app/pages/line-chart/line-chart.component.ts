@@ -18,6 +18,7 @@ export class LineChartComponent {
   public lineChartLabels: Label[];
   public chartLabels: Label[];
   public lineChartOptions: any;
+  public chartOptions: any;
   public lineChartColors: Color[];
   public lineChartColors1: Color[];
   public lineChartColors2: Color[];
@@ -273,28 +274,73 @@ export class LineChartComponent {
         annotations: [{}],
       },
     };
+    this.chartOptions = {
+      responsive: true,
+      elements:
+      {
+        point:
+        {
+          radius: 5,
+          hitRadius: 6,
+          hoverRadius: 6,
+          hoverBorderWidth: 3
+        }
+      },
+      legend: {
+        display: true,
+        position: 'bottom',
+        labels: {
+          boxWidth: 12
+        }
+      },
+      scales: {
+        xAxes: [{
+          ticks: {
+            min: this.start.toString(),
+            max: this.end.toString()
+          }
+        }],
+        yAxes: [{
+          id: 'y-axis-0',
+          position: 'left',
+          gridLines: {
+            color: 'rgba(255,0,0,0.3)',
+          },
+          ticks: {
+            beginAtZero: true,
+          }
+        }]
+      },
+      annotation: {
+        annotations: [{}],
+      },
+    };
     this.lineChartLegend = true;
     this.lineChartType = this.chartType;
     this.lineChartPlugins = [zoomPlugin];
   }
 
   next() {
-    this.start = this.start + 10;
-    this.end = this.end + 10;
-    this.checkColor();
+    if (this.end !== 1000) {
+      this.start = this.start + 10;
+      this.end = this.end + 10;
+      this.checkColor();
+    }
   }
 
   previous() {
-    this.start = this.start - 10;
-    this.end = this.end - 10;
-    this.checkColor();
+    if (this.start !== 0) {
+      this.start = this.start - 10;
+      this.end = this.end - 10;
+      this.checkColor();
+    }
   }
 
   swipeLeft(event: any): any {
     console.log('Swipe Left', event);
-}
+  }
 
-swipeRight(event: any): any {
+  swipeRight(event: any): any {
     console.log('Swipe Right', event);
-}
+  }
 }

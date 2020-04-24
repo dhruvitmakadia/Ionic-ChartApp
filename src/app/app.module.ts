@@ -15,6 +15,9 @@ import { FormsModule } from '@angular/forms';
 import { ChartsModule } from 'ng2-charts';
 import { LineChartComponent } from './pages/line-chart/line-chart.component';
 
+import { SQLite } from '@ionic-native/sqlite/ngx';
+import { SQLitePorter } from '@ionic-native/sqlite-porter/ngx';
+
 @NgModule({
   imports: [
     BrowserModule,
@@ -29,7 +32,13 @@ import { LineChartComponent } from './pages/line-chart/line-chart.component';
     })
   ],
   declarations: [AppComponent, LineChartComponent],
-  providers: [InAppBrowser, SplashScreen, StatusBar],
+  providers: [
+    InAppBrowser,
+    SplashScreen,
+    StatusBar,
+    SQLite,
+    SQLitePorter
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
