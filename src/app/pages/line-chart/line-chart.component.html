@@ -34,7 +34,8 @@
     </ion-fab-list>
   </ion-fab>
 
-  <ion-card class="welcome-card">
+  <ion-card class="welcome-card" swipeAll (swipeleft)="next()"
+  (swiperight)="previous()">
     <ion-card-header>
       <ion-card-subtitle>All Cases for</ion-card-subtitle>
       <ion-card-title>COVID-19 India</ion-card-title>

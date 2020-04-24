@@ -182,6 +182,10 @@ export class LineChartComponent {
     this.createLineChart();
   }
 
+  change(event) {
+    console.log(event.change);
+  }
+
   createLineChart() {
     this.chartData = [
       { data: this.lineChartData[0].data.slice(this.start, this.end), label: 'Confirmed ' },
@@ -274,4 +278,12 @@ export class LineChartComponent {
     this.end = this.end - 10;
     this.checkColor();
   }
+
+  swipeLeft(event: any): any {
+    console.log('Swipe Left', event);
+}
+
+swipeRight(event: any): any {
+    console.log('Swipe Right', event);
+}
 }
