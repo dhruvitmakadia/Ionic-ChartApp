@@ -33,8 +33,8 @@
       </ion-fab-button>
     </ion-fab-list>
   </ion-fab>
-
-  <ion-card class="welcome-card">
+<ion-button class="demo" (click)="changeToPage()">Change Chart {{buttonText}} Pagination</ion-button>
+  <ion-card class="welcome-card" *ngIf="buttonText=='Without'">
     <ion-card-header>
       <ion-card-subtitle>All Cases for</ion-card-subtitle>
       <ion-card-title>COVID-19 India</ion-card-title>
@@ -46,8 +46,22 @@
           [plugins]="lineChartPlugins"></canvas>
       </div>
       <div class="demo">
-        <ion-button (click)="previous()">Previous</ion-button>
-        <ion-button (click)="next()">Next</ion-button>
+        <ion-button [disabled]="start==0" (click)="previous()">Previous</ion-button>
+        <ion-button [disabled]="end==1000" (click)="next()">Next</ion-button>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card class="welcome-card" *ngIf="buttonText=='With'">
+    <ion-card-header>
+      <ion-card-subtitle>All Cases for</ion-card-subtitle>
+      <ion-card-title>COVID-19 India</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <div class="chart-container">
+        <canvas baseChart width="400" height="400" [datasets]="lineChartData" [labels]="lineChartLabels"
+          [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="chartType"
+          [plugins]="lineChartPlugins"></canvas>
       </div>
     </ion-card-content>
   </ion-card>
