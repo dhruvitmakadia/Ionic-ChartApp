@@ -34,6 +34,7 @@ export class LineChartComponent {
   chartTitle: string;
   start: number;
   end: number;
+  buttonText: string;
 
   @ViewChild(BaseChartDirective, { static: true }) chart: BaseChartDirective;
 
@@ -62,6 +63,7 @@ export class LineChartComponent {
     this.viewFlag = true;
     this.chartType = 'line';
     this.chartTitle = 'Line';
+    this.buttonText = 'Without';
     this.checkColor();
   }
 
@@ -76,6 +78,15 @@ export class LineChartComponent {
     return arr;
   }
 
+  changeToPage() {
+    this.start = 0;
+    this.end = 10;
+    if (this.buttonText === 'With') {
+      this.buttonText = 'Without';
+    } else {
+      this.buttonText = 'With';
+    }
+  }
   changeView() {
     this.viewFlag = !this.viewFlag;
   }
@@ -192,8 +203,6 @@ export class LineChartComponent {
       { data: this.lineChartData[1].data.slice(this.start, this.end), label: 'Deceased' },
       { data: this.lineChartData[2].data.slice(this.start, this.end), label: 'Recovered' }
     ];
-    console.log(this.lineChartData);
-
     this.lineChartData1 = [
       { data: this.lineChartData[0].data.slice(this.start, this.end), label: 'Confirmed ' }
     ];
@@ -245,6 +254,8 @@ export class LineChartComponent {
       scales: {
         xAxes: [{
           ticks: {
+            min: this.start.toString(),
+            max: this.end.toString()
           }
         }],
         yAxes: [{
