@@ -2,13 +2,14 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ChartDataSets, ChartOptions } from 'chart.js';
 import { Color, BaseChartDirective, Label } from 'ng2-charts';
 import * as zoomPlugin from 'chartjs-plugin-zoom';
+import { DbService } from '../../services/db.service';
 
 @Component({
   selector: 'app-line-chart',
   templateUrl: './line-chart.component.html',
   styleUrls: ['./line-chart.component.scss'],
 })
-export class LineChartComponent {
+export class LineChartComponent implements OnInit {
 
   public chartData: ChartDataSets[];
   public lineChartData: ChartDataSets[];
@@ -26,6 +27,7 @@ export class LineChartComponent {
   public lineChartLegend: boolean;
   public lineChartType: string;
   public lineChartPlugins;
+  public data: any[] = [];
 
   bars: any;
   colorArray: any;
@@ -40,7 +42,9 @@ export class LineChartComponent {
   @ViewChild(BaseChartDirective, { static: true }) chart: BaseChartDirective;
 
 
-  constructor() {
+  constructor(
+    private db: DbService
+  ) {
     this.lineChartData = [
       { data: this.randomData(), label: 'Confirmed ' },
       { data: this.randomData(), label: 'Deceased' },
@@ -65,10 +69,21 @@ export class LineChartComponent {
     this.chartType = 'line';
     this.chartTitle = 'Line';
     this.buttonText = 'Without';
+  }
+
+  public ngOnInit(): void {
     this.checkColor();
   }
 
   ionViewDidEnter() {
+    this.db.dbState().subscribe((res) => {
+      if (res) {
+        this.db.fetchCovid().subscribe(item => {
+          this.data = item;
+        });
+      }
+    });
+    alert(JSON.stringify(this.data));
   }
 
   randomData() {

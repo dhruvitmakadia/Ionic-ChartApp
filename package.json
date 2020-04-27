@@ -38,6 +38,7 @@
     "chart.js": "^2.9.3",
     "chartjs-plugin-zoom": "^0.7.5",
     "cordova-android": "^8.1.0",
+    "cordova-browser": "^6.0.0",
     "cordova-ios": "^5.1.1",
     "cordova-plugin-device": "^2.0.3",
     "cordova-plugin-inappbrowser": "^3.2.0",
@@ -46,12 +47,14 @@
     "cordova-plugin-splashscreen": "^5.0.3",
     "cordova-plugin-statusbar": "^2.4.3",
     "cordova-plugin-whitelist": "^1.3.4",
+    "cordova-sqlite-storage": "^5.0.0",
     "core-js": "^3.6.4",
     "ionic-swipe-all": "^2.0.0",
     "ng2-charts": "^2.3.0",
     "rxjs": "^6.5.4",
     "sw-toolbox": "3.6.0",
     "tslib": "^1.10.0",
+    "uk.co.workingedge.cordova.plugin.sqliteporter": "^1.1.1",
     "zone.js": "~0.9.1"
   },
   "devDependencies": {
@@ -85,7 +88,8 @@
   "cordova": {
     "platforms": [
       "ios",
-      "android"
+      "android",
+      "browser"
     ],
     "plugins": {
       "cordova-plugin-device": {},
@@ -94,7 +98,9 @@
       "cordova-plugin-whitelist": {},
       "cordova-plugin-ionic-webview": {},
       "cordova-plugin-statusbar": {},
-      "cordova-plugin-ionic-keyboard": {}
+      "cordova-plugin-ionic-keyboard": {},
+      "cordova-sqlite-storage": {},
+      "uk.co.workingedge.cordova.plugin.sqliteporter": {}
     }
   }
 }
