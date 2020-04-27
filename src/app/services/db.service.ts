@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Platform } from '@ionic/angular';
+import { Platform, ToastController } from '@ionic/angular';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite/ngx';
 import { HttpClient } from '@angular/common/http';
 import { SQLitePorter } from '@ionic-native/sqlite-porter/ngx';
@@ -20,6 +20,7 @@ export class DbService {
     private sqlite: SQLite,
     private httpClient: HttpClient,
     private sqlPorter: SQLitePorter,
+    private toastController: ToastController
   ) {
     this.platform.ready().then(() => {
       this.createDb();
@@ -32,9 +33,14 @@ export class DbService {
     this.sqlite.create({
       name: 'covid.db',
       location: 'default'
-    }).then((db: SQLiteObject) => {
+    }).then(async (db: SQLiteObject) => {
       this.storage = db;
-      alert('COVID Database Created!');
+      console.log('COVID Database Created!');
+      const toast = await this.toastController.create({
+      message: 'Database Created !',
+      duration: 2000
+    });
+      toast.present();
       this.getFakeData();
     }).catch(e => {
       alert('ERROR : ' + JSON.stringify(e));
