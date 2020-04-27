@@ -3,6 +3,7 @@ import { ChartDataSets, ChartOptions } from 'chart.js';
 import { Color, BaseChartDirective, Label } from 'ng2-charts';
 import * as zoomPlugin from 'chartjs-plugin-zoom';
 import { DbService } from '../../services/db.service';
+import { LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-line-chart',
@@ -43,7 +44,8 @@ export class LineChartComponent implements OnInit {
 
 
   constructor(
-    private db: DbService
+    private db: DbService,
+    private loadingController: LoadingController
   ) {
     this.lineChartData = [
       { data: this.randomData(), label: 'Confirmed ' },
@@ -71,11 +73,15 @@ export class LineChartComponent implements OnInit {
     this.buttonText = 'Without';
   }
 
-  public ngOnInit(): void {
-    this.checkColor();
-  }
+  public async ngOnInit(): Promise<void> {
+    const loading = await this.loadingController.create({
+      message: 'Please wait...',
+      duration: 2000
+    });
+    await loading.present();
 
-  ionViewDidEnter() {
+    await loading.onDidDismiss();
+
     this.db.dbState().subscribe((res) => {
       if (res) {
         this.db.fetchCovid().subscribe(item => {
@@ -84,6 +90,10 @@ export class LineChartComponent implements OnInit {
       }
     });
     alert(JSON.stringify(this.data));
+    this.checkColor();
+  }
+
+  ionViewDidEnter() {
   }
 
   randomData() {
