@@ -2,13 +2,14 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ChartDataSets, ChartOptions } from 'chart.js';
 import { Color, BaseChartDirective, Label } from 'ng2-charts';
 import * as zoomPlugin from 'chartjs-plugin-zoom';
+import { DbService } from '../../services/db.service';
 
 @Component({
   selector: 'app-line-chart',
   templateUrl: './line-chart.component.html',
   styleUrls: ['./line-chart.component.scss'],
 })
-export class LineChartComponent {
+export class LineChartComponent implements OnInit {
 
   public chartData: ChartDataSets[];
   public lineChartData: ChartDataSets[];
@@ -18,6 +19,7 @@ export class LineChartComponent {
   public lineChartLabels: Label[];
   public chartLabels: Label[];
   public lineChartOptions: any;
+  public chartOptions: any;
   public lineChartColors: Color[];
   public lineChartColors1: Color[];
   public lineChartColors2: Color[];
@@ -25,6 +27,7 @@ export class LineChartComponent {
   public lineChartLegend: boolean;
   public lineChartType: string;
   public lineChartPlugins;
+  public data: any[] = [];
 
   bars: any;
   colorArray: any;
@@ -39,7 +42,9 @@ export class LineChartComponent {
   @ViewChild(BaseChartDirective, { static: true }) chart: BaseChartDirective;
 
 
-  constructor() {
+  constructor(
+    private db: DbService
+  ) {
     this.lineChartData = [
       { data: this.randomData(), label: 'Confirmed ' },
       { data: this.randomData(), label: 'Deceased' },
@@ -64,10 +69,21 @@ export class LineChartComponent {
     this.chartType = 'line';
     this.chartTitle = 'Line';
     this.buttonText = 'Without';
+  }
+
+  public ngOnInit(): void {
     this.checkColor();
   }
 
   ionViewDidEnter() {
+    this.db.dbState().subscribe((res) => {
+      if (res) {
+        this.db.fetchCovid().subscribe(item => {
+          this.data = item;
+        });
+      }
+    });
+    alert(JSON.stringify(this.data));
   }
 
   randomData() {
@@ -273,28 +289,73 @@ export class LineChartComponent {
         annotations: [{}],
       },
     };
+    this.chartOptions = {
+      responsive: true,
+      elements:
+      {
+        point:
+        {
+          radius: 5,
+          hitRadius: 6,
+          hoverRadius: 6,
+          hoverBorderWidth: 3
+        }
+      },
+      legend: {
+        display: true,
+        position: 'bottom',
+        labels: {
+          boxWidth: 12
+        }
+      },
+      scales: {
+        xAxes: [{
+          ticks: {
+            min: this.start.toString(),
+            max: this.end.toString()
+          }
+        }],
+        yAxes: [{
+          id: 'y-axis-0',
+          position: 'left',
+          gridLines: {
+            color: 'rgba(255,0,0,0.3)',
+          },
+          ticks: {
+            beginAtZero: true,
+          }
+        }]
+      },
+      annotation: {
+        annotations: [{}],
+      },
+    };
     this.lineChartLegend = true;
     this.lineChartType = this.chartType;
     this.lineChartPlugins = [zoomPlugin];
   }
 
   next() {
-    this.start = this.start + 10;
-    this.end = this.end + 10;
-    this.checkColor();
+    if (this.end !== 1000) {
+      this.start = this.start + 10;
+      this.end = this.end + 10;
+      this.checkColor();
+    }
   }
 
   previous() {
-    this.start = this.start - 10;
-    this.end = this.end - 10;
-    this.checkColor();
+    if (this.start !== 0) {
+      this.start = this.start - 10;
+      this.end = this.end - 10;
+      this.checkColor();
+    }
   }
 
   swipeLeft(event: any): any {
     console.log('Swipe Left', event);
-}
+  }
 
-swipeRight(event: any): any {
+  swipeRight(event: any): any {
     console.log('Swipe Right', event);
-}
+  }
 }
