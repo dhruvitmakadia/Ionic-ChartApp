@@ -37,7 +37,7 @@ export class DbService {
       this.storage = db;
       console.log('COVID Database Created!');
       const toast = await this.toastController.create({
-        message: 'Database Created !',
+        message: 'SQLite Connection Established !',
         duration: 2000
       });
       toast.present();

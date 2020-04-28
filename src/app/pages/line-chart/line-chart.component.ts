@@ -69,7 +69,7 @@ export class LineChartComponent implements OnInit {
         });
       }
     });
-    alert(JSON.stringify(this.data));
+    // alert(JSON.stringify(this.data));
     // Call Line Chart Datas
     this.lineChartData = [
       { data: this.randomConfirmed(), label: 'Confirmed ' },
