@@ -56,15 +56,12 @@ export class LineChartComponent implements OnInit {
     this.buttonText = 'Without';
   }
 
-  public async ngOnInit(): Promise<void> {
-    const loading = await this.loadingController.create({
-      message: 'Please wait...',
-      duration: 5000
-    });
-    await loading.present();
+  public ngOnInit() {
+    this.loader();
+    this.loadData();
+  }
 
-    await loading.onDidDismiss();
-
+  public loadData(): void {
     this.db.dbState().subscribe((res) => {
       if (res) {
         this.db.fetchCovid().subscribe(item => {
@@ -83,6 +80,16 @@ export class LineChartComponent implements OnInit {
     this.lineChartLabels = this.randomChart();
     // For color
     this.checkColor();
+  }
+
+  public async loader(): Promise<void> {
+    const loading = await this.loadingController.create({
+      message: 'Please wait...',
+      duration: 5000
+    });
+    await loading.present();
+    await loading.onDidDismiss();
+    this.loadData();
   }
 
   ionViewDidEnter() {
@@ -129,7 +136,7 @@ export class LineChartComponent implements OnInit {
       this.buttonText = 'With';
     }
   }
-  
+
   changeView() {
     this.viewFlag = !this.viewFlag;
   }

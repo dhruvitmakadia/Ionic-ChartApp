@@ -37,14 +37,14 @@ export class DbService {
       this.storage = db;
       console.log('COVID Database Created!');
       const toast = await this.toastController.create({
-      message: 'Database Created !',
-      duration: 2000
-    });
+        message: 'Database Created !',
+        duration: 2000
+      });
       toast.present();
       this.getFakeData();
     }).catch(e => {
       alert('ERROR : ' + JSON.stringify(e));
-    }); 
+    });
   }
 
   dbState() {
