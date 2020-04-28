@@ -44,7 +44,7 @@ export class DbService {
       this.getFakeData();
     }).catch(e => {
       alert('ERROR : ' + JSON.stringify(e));
-    });
+    }); 
   }
 
   dbState() {
