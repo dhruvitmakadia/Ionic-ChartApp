@@ -76,7 +76,7 @@ export class LineChartComponent implements OnInit {
   public async ngOnInit(): Promise<void> {
     const loading = await this.loadingController.create({
       message: 'Please wait...',
-      duration: 2000
+      duration: 5000
     });
     await loading.present();
 
