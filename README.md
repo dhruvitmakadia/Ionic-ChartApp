@@ -1,4 +1,4 @@
-# Ionic Angular Conference Application
+# Ionic Angular Chart Application
 
 This application is purely a kitchen-sink demo of the Ionic Framework and Angular.
 
