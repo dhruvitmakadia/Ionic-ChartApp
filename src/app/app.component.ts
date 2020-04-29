@@ -16,18 +16,6 @@ import { Storage } from '@ionic/storage';
   encapsulation: ViewEncapsulation.None
 })
 export class AppComponent implements OnInit {
-  appPages = [
-    {
-      title: 'Bar Chart',
-      url: '/app/tabs/bar-chart',
-      icon: 'podium'
-    },
-    {
-      title: 'Line Chart',
-      url: '/app/tabs/line-chart',
-      icon: 'pulse'
-    }
-  ];
   dark = false;
 
   constructor(
@@ -68,6 +56,7 @@ export class AppComponent implements OnInit {
 
   initializeApp() {
     this.platform.ready().then(() => {
+      this.statusBar.backgroundColorByHexString('#ffffff');
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
@@ -77,5 +66,15 @@ export class AppComponent implements OnInit {
     this.menu.enable(false);
     this.storage.set('ion_did_tutorial', false);
     this.router.navigateByUrl('/tutorial');
+  }
+
+  setStatusBar() {
+    if (this.dark) {
+      this.statusBar.backgroundColorByHexString('#ffffff');
+      this.statusBar.styleDefault();
+    } else {
+      this.statusBar.backgroundColorByHexString('#1f1f1f');
+      this.statusBar.styleLightContent();
+    }
   }
 }
