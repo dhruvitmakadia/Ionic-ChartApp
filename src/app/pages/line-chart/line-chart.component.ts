@@ -85,7 +85,7 @@ export class LineChartComponent implements OnInit {
   public async loader(): Promise<void> {
     const loading = await this.loadingController.create({
       message: 'Please wait...',
-      duration: 5000
+      duration: 6000
     });
     await loading.present();
     await loading.onDidDismiss();
