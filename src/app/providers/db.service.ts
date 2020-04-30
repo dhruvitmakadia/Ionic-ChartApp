@@ -17,7 +17,6 @@ export class DbProvider {
 
   public loadData(): void {
     console.log('COVID');
-
     let i = 1;
     let arr = [];
     this.database.info().then((details) => {
