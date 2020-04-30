@@ -8,6 +8,7 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { Storage } from '@ionic/storage';
+import { DbProvider } from './providers/db.service';
 
 @Component({
   selector: 'app-root',
@@ -27,12 +28,13 @@ export class AppComponent implements OnInit {
     private storage: Storage,
     private swUpdate: SwUpdate,
     private toastCtrl: ToastController,
+    private dbProvider: DbProvider
   ) {
     this.initializeApp();
   }
 
   async ngOnInit() {
-
+    this.dbProvider.loadData();
     this.swUpdate.available.subscribe(async res => {
       const toast = await this.toastCtrl.create({
         message: 'Update available!',
