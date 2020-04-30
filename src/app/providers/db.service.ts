@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import PouchDB from 'pouchdb';
+import { LoadingController } from '@ionic/angular';
 
 
 @Injectable()
@@ -8,15 +9,20 @@ export class DbProvider {
   private database: any;
   private covid: any;
 
-  constructor() {
+  constructor(
+    public loadingController: LoadingController
+  ) {
     this.database = new PouchDB('covid');
   }
 
-  public addCovid(id: string, data: string): Promise<string> {
+  public addCovid(id: string, data: string, con: number, dec: number, rec: number): Promise<string> {
     const promise = this.database
       .put({
         _id: id,
-        note: data
+        lable: data,
+        confirmed: con,
+        deceased: dec,
+        recovered: rec
       })
       .then((result): string => {
         return (result.id);
@@ -25,7 +31,28 @@ export class DbProvider {
     return (promise);
   }
 
-  getCovid() {
+  async getCovid() {
+    let i = 1;
+    this.database.info().then((details) => {
+      if (details.doc_count === 0 && details.update_seq === 0) {
+        while (i <= 1000) {
+          this.addCovid(`${i}`, `${i}`, 10, 6, 4);
+          i++;
+        }
+        console.log('database does not exist');
+      } else {
+        console.log('database exists');
+      }
+    }).catch((err) => {
+      console.log('error: ' + err);
+      return;
+    });
+    const loading = await this.loadingController.create({
+      message: 'Please wait...',
+      duration: 500
+    });
+    await loading.present();
+    await loading.onDidDismiss();
     return new Promise(resolve => {
       this.database.allDocs({
         include_docs: true,

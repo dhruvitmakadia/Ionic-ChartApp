@@ -44,8 +44,6 @@ export class LineChartComponent {
   constructor(
     private dbProvider: DbProvider
   ) {
-    this.dbProvider.addCovid('1', 'Dhruvit');
-    this.dbProvider.addCovid('2', 'Amit');
     this.lineChartData = [
       { data: this.randomData(), label: 'Confirmed ' },
       { data: this.randomData(), label: 'Deceased' },
