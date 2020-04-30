@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { ChartDataSets } from 'chart.js';
 import { Color, BaseChartDirective, Label } from 'ng2-charts';
 import * as zoomPlugin from 'chartjs-plugin-zoom';
+import { DbProvider } from '../../providers/db.service';
 
 @Component({
   selector: 'app-line-chart',
@@ -40,7 +41,11 @@ export class LineChartComponent {
 
   @ViewChild(BaseChartDirective, { static: true }) chart: BaseChartDirective;
 
-  constructor() {
+  constructor(
+    private dbProvider: DbProvider
+  ) {
+    this.dbProvider.addCovid('1', 'Dhruvit');
+    this.dbProvider.addCovid('2', 'Amit');
     this.lineChartData = [
       { data: this.randomData(), label: 'Confirmed ' },
       { data: this.randomData(), label: 'Deceased' },
@@ -69,6 +74,9 @@ export class LineChartComponent {
   }
 
   ionViewDidEnter() {
+    this.dbProvider.getCovid().then((data) => {
+      console.log('Results: ' + JSON.stringify(data));
+    });
   }
 
   randomData() {

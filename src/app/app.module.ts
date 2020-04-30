@@ -14,6 +14,7 @@ import { environment } from '../environments/environment';
 import { FormsModule } from '@angular/forms';
 import { ChartsModule } from 'ng2-charts';
 import { LineChartComponent } from './pages/line-chart/line-chart.component';
+import { DbProvider } from './providers/db.service';
 
 @NgModule({
   imports: [
@@ -32,7 +33,8 @@ import { LineChartComponent } from './pages/line-chart/line-chart.component';
   providers: [
     InAppBrowser,
     SplashScreen,
-    StatusBar
+    StatusBar,
+    DbProvider
   ],
   bootstrap: [AppComponent]
 })
