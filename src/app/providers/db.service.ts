@@ -15,21 +15,25 @@ export class DbProvider {
     this.database = new PouchDB('covid');
   }
 
+  public randomData(): number {
+    return Math.floor(Math.random() * 100);
+  }
+
   public loadData(): void {
     console.log('COVID');
     let i = 1;
-    let arr = [];
+    const arr = [];
     this.database.info().then((details) => {
       if (details.doc_count === 0 && details.update_seq === 0) {
         while (i <= 1000) {
-          arr.push({ _id: `${i}`, lable: `${i}`, confirmed: 10, deceased: 4, recovered: 6 });
+          arr.push({ _id: `${i}`, label: `${i}`, confirmed: this.randomData(), deceased: this.randomData(), recovered: this.randomData() });
           console.log(i);
           i++;
         }
         this.database.bulkDocs(arr);
-        console.log('database does not exist');
+        console.log('New Data Loaded');
       } else {
-        console.log('database exists');
+        console.log('Old Data Loaded');
       }
     }).catch((err) => {
       console.log('error: ' + err);
@@ -54,7 +58,6 @@ export class DbProvider {
     });
     await loading.present();
     if (await loading.onDidDismiss()) {
-      console.log('loder off');
       return new Promise(resolve => {
         this.database.allDocs({
           include_docs: true,

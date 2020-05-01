@@ -90,7 +90,7 @@
       <ion-card-title>COVID-19 India</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <div class="chart-container" >
+      <div class="chart-container" swipeAll (swipeleft)="next()" (swiperight)="previous()">
         <canvas baseChart width="400" height="400" [datasets]="lineChartData1" [labels]="chartLabels"
           [options]="chartOptions" [colors]="lineChartColors1" [legend]="lineChartLegend" [chartType]="lineChartType"
           [plugins]="lineChartPlugins"></canvas>
