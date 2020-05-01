@@ -33,34 +33,16 @@
       </ion-fab-button>
     </ion-fab-list>
   </ion-fab>
-  <ion-button class="demo" (click)="changeToPage()">Change Chart {{buttonText}} Pagination</ion-button>
-  <ion-card class="welcome-card" *ngIf="buttonText=='Without'">
+
+  <ion-card class="welcome-card">
     <ion-card-header>
       <ion-card-subtitle>All Cases for</ion-card-subtitle>
       <ion-card-title>COVID-19 India</ion-card-title>
     </ion-card-header>
     <ion-card-content>
       <div class="chart-container" swipeAll (swipeleft)="next()" (swiperight)="previous()">
-        <canvas baseChart width="400" height="400" [datasets]="chartData" [labels]="chartLabels"
-          [options]="chartOptions" [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="chartType"
-          [plugins]="lineChartPlugins"></canvas>
-      </div>
-      <!-- <div class="demo">
-        <ion-button [disabled]="start==0" (click)="previous()">Previous</ion-button>
-        <ion-button [disabled]="end==1000" (click)="next()">Next</ion-button>
-      </div> -->
-    </ion-card-content>
-  </ion-card>
-
-  <ion-card class="welcome-card" *ngIf="buttonText=='With'">
-    <ion-card-header>
-      <ion-card-subtitle>All Cases for</ion-card-subtitle>
-      <ion-card-title>COVID-19 India</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      <div class="chart-container">
         <canvas baseChart width="400" height="400" [datasets]="lineChartData" [labels]="lineChartLabels"
-          [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="chartType"
+          [options]="chartOptions" [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="chartType"
           [plugins]="lineChartPlugins"></canvas>
       </div>
     </ion-card-content>
@@ -91,14 +73,10 @@
     </ion-card-header>
     <ion-card-content>
       <div class="chart-container" swipeAll (swipeleft)="next()" (swiperight)="previous()">
-        <canvas baseChart width="400" height="400" [datasets]="lineChartData1" [labels]="chartLabels"
+        <canvas baseChart width="400" height="400" [datasets]="lineChartData1" [labels]="lineChartLabels"
           [options]="chartOptions" [colors]="lineChartColors1" [legend]="lineChartLegend" [chartType]="lineChartType"
           [plugins]="lineChartPlugins"></canvas>
       </div>
-      <!-- <div class="demo">
-        <ion-button (click)="previous()">Previous</ion-button>
-        <ion-button (click)="next()">Next</ion-button>
-      </div> -->
     </ion-card-content>
   </ion-card>
 
@@ -109,14 +87,10 @@
     </ion-card-header>
     <ion-card-content>
       <div class="chart-container" swipeAll (swipeleft)="next()" (swiperight)="previous()">
-        <canvas baseChart width="400" height="400" [datasets]="lineChartData2" [labels]="chartLabels"
+        <canvas baseChart width="400" height="400" [datasets]="lineChartData2" [labels]="lineChartLabels"
           [options]="chartOptions" [colors]="lineChartColors2" [legend]="lineChartLegend" [chartType]="lineChartType"
           [plugins]="lineChartPlugins"></canvas>
       </div>
-      <!-- <div class="demo">
-        <ion-button (click)="previous()">Previous</ion-button>
-        <ion-button (click)="next()">Next</ion-button>
-      </div> -->
     </ion-card-content>
   </ion-card>
 
@@ -127,14 +101,10 @@
     </ion-card-header>
     <ion-card-content>
       <div class="chart-container" swipeAll (swipeleft)="next()" (swiperight)="previous()">
-        <canvas baseChart width="400" height="400" [datasets]="lineChartData3" [labels]="chartLabels"
+        <canvas baseChart width="400" height="400" [datasets]="lineChartData3" [labels]="lineChartLabels"
           [options]="chartOptions" [colors]="lineChartColors3" [legend]="lineChartLegend" [chartType]="lineChartType"
           [plugins]="lineChartPlugins"></canvas>
       </div>
-      <!-- <div class="demo">
-        <ion-button (click)="previous()">Previous</ion-button>
-        <ion-button (click)="next()">Next</ion-button>
-      </div> -->
     </ion-card-content>
   </ion-card>
 </ion-content>

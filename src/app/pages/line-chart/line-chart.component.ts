@@ -12,14 +12,11 @@ import { LoadingController } from '@ionic/angular';
 })
 export class LineChartComponent {
 
-  public chartData: ChartDataSets[];
   public lineChartData: ChartDataSets[];
   public lineChartData1: ChartDataSets[];
   public lineChartData2: ChartDataSets[];
   public lineChartData3: ChartDataSets[];
   public lineChartLabels: Label[];
-  public chartLabels: Label[];
-  public lineChartOptions: any;
   public chartOptions: any;
   public lineChartColors: Color[];
   public lineChartColors1: Color[];
@@ -103,16 +100,6 @@ export class LineChartComponent {
       this.lineChartLabels = label;
       this.checkColor();
     });
-  }
-
-  changeToPage() {
-    this.start = 0;
-    this.end = 10;
-    if (this.buttonText === 'With') {
-      this.buttonText = 'Without';
-    } else {
-      this.buttonText = 'With';
-    }
   }
 
   changeView() {
@@ -222,11 +209,6 @@ export class LineChartComponent {
   }
 
   createLineChart() {
-    this.chartData = [
-      { data: this.lineChartData[0].data, label: 'Confirmed ' },
-      { data: this.lineChartData[1].data, label: 'Deceased' },
-      { data: this.lineChartData[2].data, label: 'Recovered' }
-    ];
     this.lineChartData1 = [
       { data: this.lineChartData[0].data, label: 'Confirmed ' }
     ];
@@ -236,67 +218,7 @@ export class LineChartComponent {
     this.lineChartData3 = [
       { data: this.lineChartData[1].data, label: 'Deceased' },
     ];
-    this.chartLabels = this.lineChartLabels;
-    this.lineChartOptions = {
-      responsive: true,
-      pan: {
-        enabled: true,
-        mode: 'x',
-        sensitivity: 5,
-        speed: 10,
-        threshold: 10,
-        rangeMin: {
-          x: null,
-          y: 0,
-        },
-        rangeMax: {
-          x: null,
-          y: 100
-        }
-      },
-      zoom: {
-        enabled: true,
-        mode: 'x',
-        sensitivity: 7,
-        speed: 10,
-        rangeMin: {
-          x: null,
-          y: 0
-        },
-        rangeMax: {
-          x: null,
-          y: 100
-        }
-      },
-      legend: {
-        display: true,
-        position: 'bottom',
-        labels: {
-          boxWidth: 12
-        }
-      },
-      scales: {
-        xAxes: [{
-          ticks: {
-            min: this.start.toString(),
-            max: this.end.toString()
-          }
-        }],
-        yAxes: [{
-          id: 'y-axis-0',
-          position: 'left',
-          gridLines: {
-            color: 'rgba(255,0,0,0.3)',
-          },
-          ticks: {
-            beginAtZero: true,
-          }
-        }]
-      },
-      annotation: {
-        annotations: [{}],
-      },
-    };
+    
     this.chartOptions = {
       responsive: true,
       elements:

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import PouchDB from 'pouchdb';
 import { LoadingController } from '@ionic/angular';
+import { timestamp } from 'rxjs/operators';
 
 
 @Injectable()
@@ -22,14 +23,19 @@ export class DbProvider {
   public loadData(): void {
     let i = 1;
     const arr = [];
-    this.database.info().then((details) => {
+    this.database.info().then(async (details) => {
       if (details.doc_count === 0 && details.update_seq === 0) {
         while (i <= 1000) {
           arr.push({ _id: `${i}`, label: `${i}`, confirmed: this.randomData(), deceased: this.randomData(), recovered: this.randomData() });
-          console.log(i);
           i++;
         }
         this.database.bulkDocs(arr);
+        const loading = await this.loadingController.create({
+          message: 'Please wait...',
+          duration: 900
+        });
+        await loading.present();
+        await loading.onDidDismiss();
         console.log('New Data Loaded');
       } else {
         console.log('Old Data Loaded');
