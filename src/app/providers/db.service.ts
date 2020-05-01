@@ -20,7 +20,6 @@ export class DbProvider {
   }
 
   public loadData(): void {
-    console.log('COVID');
     let i = 1;
     const arr = [];
     this.database.info().then((details) => {
@@ -51,26 +50,24 @@ export class DbProvider {
     return (promise);
   }
 
-  async getCovid() {
-    const loading = await this.loadingController.create({
-      message: 'Please wait...',
-      duration: 2000
-    });
-    await loading.present();
-    if (await loading.onDidDismiss()) {
-      return new Promise(resolve => {
-        this.database.allDocs({
-          include_docs: true,
-          attachments: true
-        }).then((result) => {
-          // handle result
-          this.covid = result.rows;
-          resolve(this.covid);
-
-        }).catch((err) => {
-          console.log(err);
-        });
-      });
+  async getCovid(start: number, end: number) {
+    const arr = [];
+    for (let i = start + 1; i <= end; i++) {
+      arr.push(`${i}`);
     }
+    return new Promise(resolve => {
+      this.database.allDocs({
+        include_docs: true,
+        attachments: true,
+        keys: arr
+      }).then((result) => {
+        // handle result
+        this.covid = result.rows;
+        resolve(this.covid);
+
+      }).catch((err) => {
+        console.log(err);
+      });
+    });
   }
 }

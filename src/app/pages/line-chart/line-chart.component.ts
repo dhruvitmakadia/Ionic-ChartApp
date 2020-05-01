@@ -3,6 +3,7 @@ import { ChartDataSets } from 'chart.js';
 import { Color, BaseChartDirective, Label } from 'ng2-charts';
 import * as zoomPlugin from 'chartjs-plugin-zoom';
 import { DbProvider } from '../../providers/db.service';
+import { LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-line-chart',
@@ -42,7 +43,8 @@ export class LineChartComponent {
   @ViewChild(BaseChartDirective, { static: true }) chart: BaseChartDirective;
 
   constructor(
-    private dbProvider: DbProvider
+    private dbProvider: DbProvider,
+    private loadingController: LoadingController
   ) {
     this.start = 0;
     this.end = 10;
@@ -61,20 +63,32 @@ export class LineChartComponent {
   }
 
   ionViewDidEnter() {
+    this.loadChartData(this.start, this.end);
+  }
+
+  async showLoader() {
+    const loading = await this.loadingController.create({
+      message: 'Please wait...',
+      duration: 500
+    });
+    await loading.present();
+    await loading.onDidDismiss();
+  }
+
+  loadChartData(start: number, end: number) {
     let arr;
     const doc = [];
     const label = [];
     const con = [];
     const dec = [];
     const rec = [];
-    this.dbProvider.getCovid().then((data) => {
-      // console.log('Results: ' + JSON.stringify(data));
+    // this.showLoader();
+    this.dbProvider.getCovid(start, end).then((data) => {
       arr = data;
       for (const val of arr) {
         doc.push(val.doc);
       }
       doc.sort((a, b) => parseFloat(a._id) - parseFloat(b._id));
-
       for (const chart of doc) {
         label.push(chart.label);
         con.push(chart.confirmed);
@@ -207,26 +221,22 @@ export class LineChartComponent {
     this.createLineChart();
   }
 
-  change(event) {
-    console.log(event.change);
-  }
-
   createLineChart() {
     this.chartData = [
-      { data: this.lineChartData[0].data.slice(this.start, this.end), label: 'Confirmed ' },
-      { data: this.lineChartData[1].data.slice(this.start, this.end), label: 'Deceased' },
-      { data: this.lineChartData[2].data.slice(this.start, this.end), label: 'Recovered' }
+      { data: this.lineChartData[0].data, label: 'Confirmed ' },
+      { data: this.lineChartData[1].data, label: 'Deceased' },
+      { data: this.lineChartData[2].data, label: 'Recovered' }
     ];
     this.lineChartData1 = [
-      { data: this.lineChartData[0].data.slice(this.start, this.end), label: 'Confirmed ' }
+      { data: this.lineChartData[0].data, label: 'Confirmed ' }
     ];
     this.lineChartData2 = [
-      { data: this.lineChartData[2].data.slice(this.start, this.end), label: 'Recovered' }
+      { data: this.lineChartData[2].data, label: 'Recovered' }
     ];
     this.lineChartData3 = [
-      { data: this.lineChartData[1].data.slice(this.start, this.end), label: 'Deceased' },
+      { data: this.lineChartData[1].data, label: 'Deceased' },
     ];
-    this.chartLabels = this.lineChartLabels.slice(this.start, this.end);
+    this.chartLabels = this.lineChartLabels;
     this.lineChartOptions = {
       responsive: true,
       pan: {
@@ -337,7 +347,7 @@ export class LineChartComponent {
     if (this.end !== 1000) {
       this.start = this.start + 10;
       this.end = this.end + 10;
-      this.checkColor();
+      this.loadChartData(this.start, this.end);
     }
   }
 
@@ -345,15 +355,7 @@ export class LineChartComponent {
     if (this.start !== 0) {
       this.start = this.start - 10;
       this.end = this.end - 10;
-      this.checkColor();
+      this.loadChartData(this.start, this.end);
     }
-  }
-
-  swipeLeft(event: any): any {
-    console.log('Swipe Left', event);
-  }
-
-  swipeRight(event: any): any {
-    console.log('Swipe Right', event);
   }
 }
