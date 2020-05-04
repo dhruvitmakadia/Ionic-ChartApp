@@ -74,7 +74,7 @@
     <ion-card-content>
       <div class="chart-container" swipeAll (swipeleft)="next()" (swiperight)="previous()">
         <canvas baseChart width="400" height="400" [datasets]="lineChartData1" [labels]="lineChartLabels"
-          [options]="chartOptions" [colors]="lineChartColors1" [legend]="lineChartLegend" [chartType]="lineChartType"
+          [options]="lineChartOptions" [colors]="lineChartColors1" [legend]="lineChartLegend" [chartType]="lineChartType"
           [plugins]="lineChartPlugins"></canvas>
       </div>
     </ion-card-content>
@@ -88,7 +88,7 @@
     <ion-card-content>
       <div class="chart-container" swipeAll (swipeleft)="next()" (swiperight)="previous()">
         <canvas baseChart width="400" height="400" [datasets]="lineChartData2" [labels]="lineChartLabels"
-          [options]="chartOptions" [colors]="lineChartColors2" [legend]="lineChartLegend" [chartType]="lineChartType"
+          [options]="lineChartOptions" [colors]="lineChartColors2" [legend]="lineChartLegend" [chartType]="lineChartType"
           [plugins]="lineChartPlugins"></canvas>
       </div>
     </ion-card-content>
@@ -102,7 +102,7 @@
     <ion-card-content>
       <div class="chart-container" swipeAll (swipeleft)="next()" (swiperight)="previous()">
         <canvas baseChart width="400" height="400" [datasets]="lineChartData3" [labels]="lineChartLabels"
-          [options]="chartOptions" [colors]="lineChartColors3" [legend]="lineChartLegend" [chartType]="lineChartType"
+          [options]="lineChartOptions" [colors]="lineChartColors3" [legend]="lineChartLegend" [chartType]="lineChartType"
           [plugins]="lineChartPlugins"></canvas>
       </div>
     </ion-card-content>

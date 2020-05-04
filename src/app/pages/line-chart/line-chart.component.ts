@@ -17,6 +17,7 @@ export class LineChartComponent {
   public lineChartData2: ChartDataSets[];
   public lineChartData3: ChartDataSets[];
   public lineChartLabels: Label[];
+  public lineChartOptions: any;
   public chartOptions: any;
   public lineChartColors: Color[];
   public lineChartColors1: Color[];
@@ -27,15 +28,24 @@ export class LineChartComponent {
   public lineChartPlugins;
   public data: any[] = [];
 
-  bars: any;
-  colorArray: any;
-  segment: string;
-  viewFlag: boolean;
-  chartType: string;
-  chartTitle: string;
-  start: number;
-  end: number;
-  buttonText: string;
+  public bars: any;
+  public colorArray: any;
+  public segment: string;
+  public viewFlag: boolean;
+  public chartType: string;
+  public chartTitle: string;
+  public start: number;
+  public end: number;
+  public buttonText: string;
+
+  public conFlag: boolean;
+  public decFlag: boolean;
+  public recFlag: boolean;
+
+  private label: string[];
+  private con: number[];
+  private dec: number[];
+  private rec: number[];
 
   @ViewChild(BaseChartDirective, { static: true }) chart: BaseChartDirective;
 
@@ -50,10 +60,13 @@ export class LineChartComponent {
     this.chartType = 'line';
     this.chartTitle = 'Line';
     this.buttonText = 'Without';
+    this.conFlag = false;
+    this.decFlag = false;
+    this.recFlag = false;
     this.lineChartData = [
-      { data: [], label: 'Confirmed ' },
-      { data: [], label: 'Deceased' },
-      { data: [], label: 'Recovered' }
+      { data: [], hidden: this.conFlag, label: 'Confirmed ' },
+      { data: [], hidden: this.decFlag, label: 'Deceased' },
+      { data: [], hidden: this.recFlag, label: 'Recovered' }
     ];
     this.lineChartLabels = [];
     this.checkColor();
@@ -75,10 +88,10 @@ export class LineChartComponent {
   loadChartData(start: number, end: number) {
     let arr;
     const doc = [];
-    const label = [];
-    const con = [];
-    const dec = [];
-    const rec = [];
+    this.label = [];
+    this.con = [];
+    this.dec = [];
+    this.rec = [];
     // this.showLoader();
     this.dbProvider.getCovid(start, end).then((data) => {
       arr = data;
@@ -87,19 +100,23 @@ export class LineChartComponent {
       }
       doc.sort((a, b) => parseFloat(a._id) - parseFloat(b._id));
       for (const chart of doc) {
-        label.push(chart.label);
-        con.push(chart.confirmed);
-        dec.push(chart.deceased);
-        rec.push(chart.recovered);
+        this.label.push(chart.label);
+        this.con.push(chart.confirmed);
+        this.dec.push(chart.deceased);
+        this.rec.push(chart.recovered);
       }
-      this.lineChartData = [
-        { data: con, label: 'Confirmed ' },
-        { data: dec, label: 'Deceased' },
-        { data: rec, label: 'Recovered' }
-      ];
-      this.lineChartLabels = label;
-      this.checkColor();
+      this.changeLegend();
     });
+  }
+
+  changeLegend() {
+    this.lineChartData = [
+      { data: this.con, hidden: this.conFlag, label: 'Confirmed ' },
+      { data: this.dec, hidden: this.decFlag, label: 'Deceased' },
+      { data: this.rec, hidden: this.recFlag, label: 'Recovered' }
+    ];
+    this.lineChartLabels = this.label;
+    this.checkColor();
   }
 
   changeView() {
@@ -218,7 +235,6 @@ export class LineChartComponent {
     this.lineChartData3 = [
       { data: this.lineChartData[1].data, label: 'Deceased' },
     ];
-    
     this.chartOptions = {
       responsive: true,
       elements:
@@ -233,6 +249,62 @@ export class LineChartComponent {
       },
       legend: {
         display: true,
+        onClick: (e, legendItem) => {
+          if (legendItem.datasetIndex === 0) {
+            this.conFlag = !this.conFlag;
+            this.changeLegend();
+          }
+          if (legendItem.datasetIndex === 1) {
+            this.decFlag = !this.decFlag;
+            this.changeLegend();
+          }
+          if (legendItem.datasetIndex === 2) {
+            this.recFlag = !this.recFlag;
+            this.changeLegend();
+          }
+        },
+        position: 'bottom',
+        labels: {
+          boxWidth: 12
+        }
+      },
+      scales: {
+        xAxes: [{
+          ticks: {
+            min: this.start.toString(),
+            max: this.end.toString()
+          }
+        }],
+        yAxes: [{
+          id: 'y-axis-0',
+          position: 'left',
+          gridLines: {
+            color: 'rgba(255,0,0,0.3)',
+          },
+          ticks: {
+            beginAtZero: true,
+          }
+        }]
+      },
+      annotation: {
+        annotations: [{}],
+      },
+    };
+    this.lineChartOptions = {
+      responsive: true,
+      elements:
+      {
+        point:
+        {
+          radius: 5,
+          hitRadius: 6,
+          hoverRadius: 6,
+          hoverBorderWidth: 3
+        }
+      },
+      legend: {
+        display: true,
+        onClick: () => {},
         position: 'bottom',
         labels: {
           boxWidth: 12
